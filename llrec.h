@@ -85,18 +85,15 @@ Node* llfilter(Node* head, Comp pred)
     //*********************************************
 		if (head == NULL)
 			return NULL;
-		
-		while (head ->next != NULL && pred(head -> val)) // update head
+		if (pred(head -> val))
 		{
 			Node* temp = head;
-			head = head -> next;
+			head = llfilter(head -> next, pred);
 			delete temp;
-			if (head == NULL)
-				return NULL;
-
-
+			return head;
 		}
-		 if (head -> next == NULL)
+
+		if (head -> next == NULL)
 		{
 			// one element left
 			if (pred(head -> val)){
